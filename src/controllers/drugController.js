@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const API_URL = "https://api.fda.gov/drug/event.json?";
-const ALL_INFORMATION = 'search=primarysourcecountry:"US"&limit=100';
+const ALL_INFORMATION = 'search=primarysourcecountry:"US"&limit=1000';
 const DRUG_NAMES =
-  'count=patient.drug.medicinalproduct.exact&search=primarysourcecountry:"US"';
+  'count=patient.drug.medicinalproduct.exact&search=primarysourcecountry:"US"&limit=50';
 const DRUG_INFO = 'search=openfda.brand_name:"PRADAXA"';
 
 export const fetchDrugs = async () => {
@@ -21,6 +21,8 @@ export const fetchDrugs = async () => {
   try {
     const responde = await axios.get(API_URL + DRUG_NAMES);
     // console.log("Nombres[]: ", responde.data.results);
+    // TODO Paging - I didn't see NEXT or st like that.
+    console.log(responde);
     return responde.data.results;
   } catch (err) {
     console.log("Error en el fetchDrugs");
