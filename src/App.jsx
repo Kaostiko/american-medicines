@@ -1,11 +1,12 @@
 import React from "react";
+import { Home } from "./view/Home";
+import { Container } from "@mui/material";
 
 function App() {
   return (
-    <>
-      <h1>Prueba técnica JARAXA</h1>
-      <h3>Limpia y organización carpetas proyecto. Dependencias requeridas.</h3>
-    </>
+    <Container>
+      <Home />
+    </Container>
   );
 }
 
