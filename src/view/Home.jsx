@@ -4,6 +4,7 @@ import {
   Typography,
   CircularProgress,
   TextField,
+  Pagination,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { fetchDrugs } from "../controllers/drugController";
@@ -17,18 +18,21 @@ export const Home = () => {
   const [searchText, setSearchText] = useState("");
   //Data array w/ the flitered result
   const [filteredDrugs, setFilteredDrugs] = useState([]);
+  //Paginatio
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 100;
 
   useEffect(() => {
     // Load all the data at the beginning
     const fetchData = async () => {
       //Show loader
       setLoading(true);
+      //Controller call
       const results = await fetchDrugs();
       setDrug(results);
       setFilteredDrugs(results);
       //Take off loader
       setLoading(false);
-      // console.log(results);
     };
 
     fetchData();
@@ -43,12 +47,23 @@ export const Home = () => {
         const filtered = drug.filter((d) =>
           d.term.toLowerCase().includes(searchText.toLowerCase())
         );
+        // Set the pagination and the data filtered
+        setCurrentPage(1);
         setFilteredDrugs(filtered);
       }
     };
 
     filterResults();
-  }, [searchText, setDrug]);
+  }, [searchText, drug]);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const displayedDrugs = filteredDrugs.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <Box
@@ -65,19 +80,33 @@ export const Home = () => {
         variant="outlined"
         value={searchText}
         onChange={(e) => {
-          setSearchText(e.target.value), console.log(e.target.value);
+          setSearchText(e.target.value);
         }}
         fullWidth
         margin="normal"
       />
+      {!loading && (
+        <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
+          <Typography textAlign="center" mr={3}>
+            Página: {currentPage}
+          </Typography>
+          <Pagination
+            count={Math.ceil(filteredDrugs.length / itemsPerPage)}
+            variant="outlined"
+            shape="rounded"
+            page={currentPage}
+            onChange={handlePageChange}
+          />
+        </Box>
+      )}
 
       <Box mt={2}>
         {loading ? (
           <Box display="flex" justifyContent="center" mt={2}>
             <CircularProgress color="success" />
           </Box>
-        ) : filteredDrugs?.length > 0 ? (
-          filteredDrugs.map((filteredDrugs, index) => (
+        ) : displayedDrugs?.length > 0 ? (
+          displayedDrugs.map((drug, index) => (
             <Box
               key={index}
               mb={2}
@@ -89,9 +118,11 @@ export const Home = () => {
               alignItems="center"
             >
               <Box display="flex" flexDirection="column">
-                <Typography variant="body2">Medicamento:</Typography>
-                <Typography variant="body1">{filteredDrugs?.term}</Typography>
+                <Typography variant="body2">Nombre del Medicamento:</Typography>
+
+                <Typography variant="body1">{drug?.term}</Typography>
               </Box>
+
               <Button>+ INFO</Button>
             </Box>
           ))
