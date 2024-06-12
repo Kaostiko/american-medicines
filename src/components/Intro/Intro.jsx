@@ -33,7 +33,6 @@ const Intro = () => {
               lg: "5rem",
             },
             backgroundColor: "rgba(0, 0, 0, 0.5)",
-            // backgroundColor: "rgb(249, 178, 50, 0.8)",
             padding: "20px",
             borderRadius: "50px",
             color: "#f9b232",
