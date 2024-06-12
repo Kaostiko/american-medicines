@@ -8,8 +8,6 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { fetchDrugs, fetchOneDrug } from "../controllers/drugController";
-import { useNavigate } from "react-router-dom";
-import { blue } from "@mui/material/colors";
 import Intro from "../components/Intro/Intro";
 import Searcher from "../components/Searcher/Searcher";
 import DrugList from "../components/DrugList/DrugList";
@@ -26,8 +24,6 @@ export const Home = () => {
   //Paginatio
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 100;
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Load all the data at the beginning
@@ -70,7 +66,7 @@ export const Home = () => {
   //Show a new page w/ the info of a drug.
   const handleInfo = (drugName) => {
     fetchOneDrug(drugName);
-    navigate(`/drug/${drugName}`);
+    window.open(`/drug/${drugName}`, "_blank");
   };
 
   return (

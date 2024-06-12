@@ -64,7 +64,7 @@ const Intro = () => {
       <Box
         component="img"
         src="./assets/mision.jpg"
-        alt="Background"
+        alt="mision"
         sx={{
           width: "100%",
           maxHeight: "300px",
@@ -86,7 +86,8 @@ const Intro = () => {
         En Farmacológica Morán, nuestra misión es proporcionar acceso a
         tratamientos efectivos y seguros, respaldados por la ciencia y
         desarrollados con el más alto estándar de calidad y ponemos a su
-        disposición una búsqueda de los medicamentos comercializados
+        disposición una búsqueda de los medicamentos comercializados para
+        ampliar información detallada sobre ellos.
       </Typography>
     </>
   );

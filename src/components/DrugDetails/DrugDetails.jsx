@@ -39,6 +39,16 @@ const DrugDetails = () => {
             <Typography variant="h3">
               {drugInfo.openfda.brand_name[0]}
             </Typography>{" "}
+            <Box
+              component="img"
+              src="./assets/doctor.png"
+              alt="doctor"
+              sx={{
+                width: "50%",
+                maxHeight: "100px",
+                objectFit: "cover",
+              }}
+            />
             <Button href="/" variant="contained">
               Volver
             </Button>
