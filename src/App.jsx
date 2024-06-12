@@ -1,12 +1,12 @@
 import React from "react";
-import { Home } from "./view/Home";
-import { Container } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
+import { AppRoutes } from "./routes/AppRoutes";
 
 function App() {
   return (
-    <Container>
-      <Home />
-    </Container>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 

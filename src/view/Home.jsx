@@ -7,7 +7,9 @@ import {
   Pagination,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { fetchDrugs } from "../controllers/drugController";
+import { fetchDrugs, fetchOneDrug } from "../controllers/drugController";
+import { useNavigate } from "react-router-dom";
+import { blue } from "@mui/material/colors";
 
 export const Home = () => {
   //Name data array
@@ -21,6 +23,8 @@ export const Home = () => {
   //Paginatio
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 100;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Load all the data at the beginning
@@ -65,15 +69,33 @@ export const Home = () => {
     currentPage * itemsPerPage
   );
 
+  //Show a new page w/ the info of a drug.
+  const handleInfo = (drugName) => {
+    fetchOneDrug(drugName);
+    navigate(`/drug/${drugName}`);
+  };
+
   return (
     <Box
       display="flex"
       flexDirection="column"
       justifyContent="space-around"
       alignItems="stretch"
-      m={5}
+      m={2}
     >
-      <h1 m={3}>Todos los medicamentos</h1>
+      <Typography
+        textAlign="center"
+        sx={{
+          fontSize: {
+            xs: "2rem", // Small devices like mobile
+            sm: "3rem", // Small to medium devices
+            md: "4rem", // Medium to large devices
+            lg: "5rem", // Large devices like desktop
+          },
+        }}
+      >
+        Todos los medicamentos
+      </Typography>
 
       <TextField
         label="Buscar Medicamento"
@@ -116,6 +138,7 @@ export const Home = () => {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
+              bgcolor={blue[100]}
             >
               <Box display="flex" flexDirection="column">
                 <Typography variant="body2">Nombre del Medicamento:</Typography>
@@ -123,7 +146,7 @@ export const Home = () => {
                 <Typography variant="body1">{drug?.term}</Typography>
               </Box>
 
-              <Button>+ INFO</Button>
+              <Button onClick={() => handleInfo(drug.term)}>+ INFO</Button>
             </Box>
           ))
         ) : (

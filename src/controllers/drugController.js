@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_URL = "https://api.fda.gov/drug/event.json?";
+const API_URL = "https://api.fda.gov/drug/";
 // const API_US = 'search=primarysourcecountry:"US"';
 const DRUG_NAMES =
-  'count=patient.drug.medicinalproduct.exact&search=primarysourcecountry:"US"&limit=1000';
-const DRUG_INFO = 'search=openfda.brand_name:"PRADAXA"';
+  'event.json?count=patient.drug.medicinalproduct.exact&search=primarysourcecountry:"US"&limit=1000';
+const DRUG_INFO = "label.json?search=openfda.brand_name:";
 
 export const fetchDrugs = async () => {
   /**
@@ -31,14 +31,16 @@ export const fetchDrugs = async () => {
   }
 };
 
-//TODO
-/* export const fetchOneDrug = async () => {
- 
+//TODO Documentar
+export const fetchOneDrug = async (drugName) => {
   try {
-    const response = await axios.get(API_URL + DRUG_INFO);
-    return response;
+    const response = await axios.get(`${API_URL}${DRUG_INFO}"${drugName}"`);
+
+    const responde = response.data.results[0];
+    console.log(responde);
+    return responde;
   } catch (err) {
-    console.log("Error en el fetchDrugs");
+    console.log("Error en el fetchOneDrug", err);
     return [];
   }
-}; */
+};
