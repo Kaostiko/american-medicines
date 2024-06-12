@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { fetchDrugs, fetchOneDrug } from "../controllers/drugController";
 import { useNavigate } from "react-router-dom";
 import { blue } from "@mui/material/colors";
+import Intro from "../components/Intro/Intro";
 
 export const Home = () => {
   //Name data array
@@ -76,83 +77,94 @@ export const Home = () => {
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="space-around"
-      alignItems="stretch"
-      m={2}
-    >
-      <Typography
-        textAlign="center"
-        sx={{
-          fontSize: {
-            xs: "2rem", // Small devices like mobile
-            sm: "3rem", // Small to medium devices
-            md: "4rem", // Medium to large devices
-            lg: "5rem", // Large devices like desktop
-          },
-        }}
+    <>
+      <Intro />
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-around"
+        alignItems="stretch"
+        mt={2}
+        bgcolor="red"
       >
-        Todos los medicamentos
-      </Typography>
+        <Typography
+          textAlign="center"
+          sx={{
+            fontSize: {
+              xs: "2rem",
+              sm: "3rem",
+              md: "4rem",
+              lg: "5rem",
+            },
+          }}
+        >
+          Buscador de medicamentos
+        </Typography>
 
-      <TextField
-        label="Buscar Medicamento"
-        variant="outlined"
-        value={searchText}
-        onChange={(e) => {
-          setSearchText(e.target.value);
-        }}
-        fullWidth
-        margin="normal"
-      />
-      {!loading && (
-        <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
-          <Typography textAlign="center" mr={3}>
-            Página: {currentPage}
-          </Typography>
-          <Pagination
-            count={Math.ceil(filteredDrugs.length / itemsPerPage)}
-            variant="outlined"
-            shape="rounded"
-            page={currentPage}
-            onChange={handlePageChange}
-          />
-        </Box>
-      )}
-
-      <Box mt={2}>
-        {loading ? (
-          <Box display="flex" justifyContent="center" mt={2}>
-            <CircularProgress color="success" />
+        <TextField
+          label="Buscar Medicamento"
+          variant="outlined"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+          fullWidth
+          margin="normal"
+        />
+        {!loading && (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mb={2}
+          >
+            <Typography textAlign="center" mr={3}>
+              Página: {currentPage}
+            </Typography>
+            <Pagination
+              count={Math.ceil(filteredDrugs.length / itemsPerPage)}
+              variant="outlined"
+              shape="rounded"
+              page={currentPage}
+              onChange={handlePageChange}
+            />
           </Box>
-        ) : displayedDrugs?.length > 0 ? (
-          displayedDrugs.map((drug, index) => (
-            <Box
-              key={index}
-              mb={2}
-              p={2}
-              border={1}
-              borderRadius={4}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              bgcolor={blue[100]}
-            >
-              <Box display="flex" flexDirection="column">
-                <Typography variant="body2">Nombre del Medicamento:</Typography>
-
-                <Typography variant="body1">{drug?.term}</Typography>
-              </Box>
-
-              <Button onClick={() => handleInfo(drug.term)}>+ INFO</Button>
-            </Box>
-          ))
-        ) : (
-          <Typography variant="body1">Sin datos</Typography>
         )}
+
+        <Box mt={2}>
+          {loading ? (
+            <Box display="flex" justifyContent="center" mt={2}>
+              <CircularProgress color="success" />
+            </Box>
+          ) : displayedDrugs?.length > 0 ? (
+            displayedDrugs.map((drug, index) => (
+              <Box
+                key={index}
+                mb={2}
+                p={2}
+                border={1}
+                borderRadius={4}
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                bgcolor={blue[100]}
+              >
+                <Box display="flex" flexDirection="column">
+                  <Typography variant="body2">
+                    Nombre del Medicamento:
+                  </Typography>
+
+                  <Typography variant="body1">{drug?.term}</Typography>
+                </Box>
+
+                <Button onClick={() => handleInfo(drug.term)}>+ INFO</Button>
+              </Box>
+            ))
+          ) : (
+            <Typography variant="body1">Sin datos</Typography>
+          )}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
