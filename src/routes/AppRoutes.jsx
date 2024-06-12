@@ -6,10 +6,7 @@ import DrugDetails from "../components/DrugDetails/DrugDetails";
 
 export const AppRoutes = () => {
   return (
-    <Container
-      maxWidth="xxl"
-      sx={{ backgroundColor: "#f4f4f4", marginBottom: 5 }}
-    >
+    <Container maxWidth="xxl">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/drug/:drugName" element={<DrugDetails />} />

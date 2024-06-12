@@ -35,9 +35,8 @@ export const fetchDrugs = async () => {
 export const fetchOneDrug = async (drugName) => {
   try {
     const response = await axios.get(`${API_URL}${DRUG_INFO}"${drugName}"`);
-
     const responde = response.data.results[0];
-    console.log(responde);
+    // console.log(responde);
     return responde;
   } catch (err) {
     console.log("Error en el fetchOneDrug", err);

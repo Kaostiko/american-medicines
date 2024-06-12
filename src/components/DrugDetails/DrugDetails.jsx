@@ -8,6 +8,7 @@ import {
   CircularProgress,
   Button,
   Divider,
+  Container,
 } from "@mui/material";
 import { purple } from "@mui/material/colors";
 
@@ -28,56 +29,140 @@ const DrugDetails = () => {
   }, [drugName]);
 
   return (
-    <Box m={5}>
+    <Container
+      sx={{
+        backgroundColor: "white",
+      }}
+    >
       {loading ? (
         <Box display="flex" justifyContent="center" mt={2}>
           <CircularProgress color="success" />
         </Box>
       ) : (
-        <Box m={5}>
+        <Box m={5} textAlign="center">
           <Box display="flex" justifyContent="space-between" mb={5}>
-            <Typography variant="h3">
+            <Typography variant="h3" textAlign="center">
               {drugInfo.openfda.brand_name[0]}
-            </Typography>{" "}
-            <Box
-              component="img"
-              src="./assets/doctor.png"
-              alt="doctor"
-              sx={{
-                width: "50%",
-                maxHeight: "100px",
-                objectFit: "cover",
-              }}
-            />
-            <Button href="/" variant="contained">
-              Volver
-            </Button>
+            </Typography>
           </Box>
           <Divider />
-          <Box mt={5} bgcolor={purple[100]}>
-            <Typography variant="h5">
-              Nombre genérico: {drugInfo.openfda.generic_name[0]}
-            </Typography>
-            <Typography variant="h5">
-              Manufacturado por: {drugInfo.openfda.manufacturer_name[0]}
-            </Typography>
-            <Typography variant="h5">
-              Tipo de producto: {drugInfo.openfda.product_type[0]}
-            </Typography>
-
-            <Typography variant="body1">
-              Nombre de la sustancia: {drugInfo.openfda.substance_name}
-            </Typography>
-            <Typography variant="body1">
-              Descripción: {drugInfo.description}
-            </Typography>
-            <Typography variant="body1">
-              Propósito: {drugInfo.purpose}
-            </Typography>
+          <Box
+            mt={5}
+            display="flex"
+            flexWrap="wrap"
+            justifyContent="center"
+            gap={5}
+          >
+            <Box
+              sx={{
+                backgroundColor: "rgb(126, 176, 195, 0.5)",
+                padding: 5,
+                width: "45%",
+                borderRadius: "25px",
+              }}
+            >
+              <Typography variant="h6">Nombre genérico:</Typography>
+              <Typography variant="h5">
+                {drugInfo.openfda.generic_name[0]}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: "rgb(21, 54, 92)",
+                padding: 5,
+                width: "45%",
+                borderRadius: "25px",
+                color: "white",
+              }}
+            >
+              <Typography variant="h6">Manufacturado por:</Typography>
+              <Typography variant="h5">
+                {drugInfo.openfda.manufacturer_name[0]}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: "rgb(21, 54, 92)",
+                padding: 5,
+                width: "45%",
+                borderRadius: "25px",
+                color: "white",
+              }}
+            >
+              <Typography variant="h6">Tipo de producto:</Typography>
+              <Typography variant="h5">
+                {drugInfo.openfda.product_type[0]}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: "rgb(126, 176, 195, 0.5)",
+                padding: 5,
+                width: "45%",
+                borderRadius: "25px",
+                color: "black",
+              }}
+            >
+              <Typography variant="h6">Nombre de la sustancia:</Typography>
+              <Typography variant="h5">
+                {drugInfo.openfda.substance_name}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: "rgb(126, 176, 195, 0.5)",
+                padding: 5,
+                width: "45%",
+                borderRadius: "25px",
+              }}
+            >
+              <Typography variant="h6"> Propósito: </Typography>
+              <Typography variant="h5">{drugInfo.purpose}</Typography>
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: "rgb(21, 54, 92)",
+                padding: 5,
+                width: "45%",
+                borderRadius: "25px",
+                color: "white",
+              }}
+            >
+              <Typography variant="h6">No usar:</Typography>
+              <Typography variant="h5">{drugInfo.do_not_use}</Typography>
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: "rgb(21, 54, 92)",
+                padding: 5,
+                width: "45%",
+                borderRadius: "25px",
+                color: "white",
+              }}
+            >
+              <Typography variant="h6">Pregunta al doctor si:</Typography>
+              <Typography variant="h5">
+                {drugInfo.ask_doctor_or_pharmacist}
+              </Typography>
+            </Box>
+            <Box
+              mb={10}
+              sx={{
+                backgroundColor: "rgb(126, 176, 195, 0.5)",
+                padding: "50px",
+                borderRadius: "25px",
+                color: "black",
+              }}
+            >
+              <Typography variant="h6">Indicaciones de uso:</Typography>
+              <Typography variant="h5">
+                {drugInfo.indications_and_usage[0]}
+              </Typography>
+            </Box>
           </Box>
         </Box>
       )}
-    </Box>
+    </Container>
   );
 };
 
