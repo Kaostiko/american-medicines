@@ -5,10 +5,10 @@ const Searcher = ({ searchText, setSearchText }) => {
   return (
     <Box>
       <Typography variant="h2" textAlign="center" p={5}>
-        Buscador de medicamentos
+        Medication search
       </Typography>
       <TextField
-        label="Nombre del medicamento"
+        label="Drug's name"
         variant="outlined"
         value={searchText}
         onChange={(e) => {

@@ -53,13 +53,13 @@ const Intro = () => {
           },
         }}
       >
-        En Farmacológica Morán, estamos dedicados a mejorar la salud y el
-        bienestar de las personas a través de medicamentos innovadores y de alta
-        calidad. Nuestro compromiso es ofrecer soluciones farmacéuticas que
-        marquen la diferencia en la vida de nuestros pacientes y clientes.
+        We are dedicated to improving the health and well-being of people
+        through innovative and high-quality medications. Our commitment is to
+        provide pharmaceutical solutions that make a difference in the lives of
+        our patients and clients.
       </Typography>
       <Typography variant="h2" textAlign="center" p={5}>
-        Nuestra Misión
+        Our mission
       </Typography>
       <Box
         component="img"
@@ -83,11 +83,10 @@ const Intro = () => {
           },
         }}
       >
-        En Farmacológica Morán, nuestra misión es proporcionar acceso a
-        tratamientos efectivos y seguros, respaldados por la ciencia y
-        desarrollados con el más alto estándar de calidad y ponemos a su
-        disposición una búsqueda de los medicamentos comercializados para
-        ampliar información detallada sobre ellos.
+        At Farmacológica Morán, our mission is to provide access to effective
+        and safe treatments, backed by science and developed with the highest
+        standard of quality. We offer a search tool for marketed medications to
+        provide detailed information about them.
       </Typography>
     </>
   );
